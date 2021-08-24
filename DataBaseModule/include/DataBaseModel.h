@@ -2,7 +2,7 @@
 #define DataBaseModel_h__
 
 #include "IDataBaseModel.h"
-
+class QSqlQuery;
 class CDataBaseModel :public IDataBaseModel
 {
 public:
@@ -116,6 +116,24 @@ public:
  	* @return   
 	*/
 	virtual void SetDataBase(QSqlDatabase* db);
+	/**
+ 	* @fn       SetSQL
+ 	* @author   Crack
+ 	* @brief       
+ 	* @date     2021/8/24 17:26
+ 	* @param    
+ 	* @return   
+	*/
+	virtual bool SetSQL(bool bRead, ITableModel& tModel, const std::string& strSQL);
+	/**
+ 	* @fn       SetSQL
+ 	* @author   Crack
+ 	* @brief       
+ 	* @date     2021/8/24 17:26
+ 	* @param    
+ 	* @return   
+	*/
+	virtual bool SetSQL(bool bRead, std::list<ITableModel*>& lModel, const std::string& strSQL);
 private:
 	CICDModel m_ICDModel;
 	CAutoSwitchModel m_AutoSwichModel;
@@ -125,5 +143,6 @@ private:
 	CVariableModel m_VariableModel;
 	CVarMappingModel m_VarMapppingModel;
 	QSqlDatabase* m_pDataBase;
+	QSqlQuery* m_pQuery;
 };
 #endif // DataBaseModel_h__

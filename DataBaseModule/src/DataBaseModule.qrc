@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>IntegrateCases.db</file>
+        <file>Resource/IntegrateCases.db</file>
     </qresource>
 </RCC>

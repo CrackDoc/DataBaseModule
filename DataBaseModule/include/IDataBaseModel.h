@@ -3,6 +3,7 @@
 
 #include <string>
 #include "ITableModel.h"
+#include <list>
 
 class QSqlDatabase;
 class  IDataBaseModel
@@ -117,5 +118,23 @@ public:
  	* @return   
 	*/
 	virtual void SetDataBase(QSqlDatabase *db) = 0;
+	/**
+ 	* @fn       SetSQL
+ 	* @author   Crack
+ 	* @brief       
+ 	* @date     2021/8/24 17:26
+ 	* @param    
+ 	* @return   
+	*/
+	virtual bool SetSQL(bool bRead,ITableModel& tModel, const std::string& strSQL) = 0;
+	/**
+ 	* @fn       SetSQL
+ 	* @author   Crack
+ 	* @brief       
+ 	* @date     2021/8/24 17:26
+ 	* @param    
+ 	* @return   
+	*/
+	virtual bool SetSQL(bool bRead, std::list<ITableModel*>& lModel, const std::string& strSQL) = 0;
 };
 #endif // IDataBaseModel_h__

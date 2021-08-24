@@ -30,6 +30,7 @@ FIND_PACKAGE(Qt5Sql REQUIRED)
 FILE(GLOB MOC_FILES ${_SRC_PATH}/moc_*.cpp)
 
 QT5_WRAP_CPP(MOC_FILES ${HEADER_FILES})
+QT5_ADD_RESOURCES(qrc_FILES ${_SRC_PATH}/${PROJECT_NAME}.qrc)
 
 #将ui文件和生成文件整理在一个文件夹中
 SOURCE_GROUP("Form Files" FILES ${FORMS})
@@ -38,17 +39,18 @@ SOURCE_GROUP("Generated Files" FILES ${MOC_FILES})
 
 
 #查找当前目录下所有的.h和.cpp文件
+SOURCE_GROUP("Resource Files" FILES ${_SRC_PATH}/${PROJECT_NAME}.qrc)
 SOURCE_GROUP("Header Files" FILES ${HEADER_FILES})
 SOURCE_GROUP("Source Files" FILES ${SOURCE_FILES})
 
 #-----------------TODO 创建工程内的库
 #-----------------STATIC表示创建静态库，目标文件为 libmylib.a，如果是 SHARED， 则为创建动态库.
 IF(OUTPUT_TYPE STREQUAL "dll")
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${MOC_FILES})
+add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${MOC_FILES} ${qrc_FILES})
 ELSEIF(OUTPUT_TYPE STREQUAL "lib")
-add_library(${PROJECT_NAME} STATIC ${HEADER_FILES} ${SOURCE_FILES} ${MOC_FILES})
+add_library(${PROJECT_NAME} STATIC ${HEADER_FILES} ${SOURCE_FILES} ${MOC_FILES} ${qrc_FILES})
 ELSE()
-add_executable (${PROJECT_NAME} ${HEADER_FILES} ${SOURCE_FILES} ${MOC_FILES})
+add_executable (${PROJECT_NAME} ${HEADER_FILES} ${SOURCE_FILES} ${MOC_FILES} ${qrc_FILES})
 ENDIF()
 
 #-----------------TODO EXE编译连接

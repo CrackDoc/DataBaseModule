@@ -44,6 +44,7 @@ bool CDataBaseModule::Uninitialise()
 {
 	return true;
 }
+
 IMPLEMENT_MODULE(DataBase)
 
 void CDataBaseModule::SetDBAbsolutePath(const std::string& strDBPath)
@@ -59,13 +60,15 @@ bool CDataBaseModule::OpenDB(std::string strDBPath)
 	if (m_strDBPath.isEmpty())
 	{
 		m_strDBPath = QCoreApplication::applicationDirPath() + "/IntegrateCases.db";
+		//m_strDBPath = QString("C:/WorkSpace/DataBaseModule/build64/UnitTest/Debug/IntegrateCases.db");
 	}
 	QFileInfo info(m_strDBPath);
 	if (!info.exists())
 	{
-		QFile::copy(":/IntegrateCases.db", m_strDBPath);
+		QFile::copy(":/Resource/IntegrateCases.db", m_strDBPath);
 	}
-	m_pDB = &QSqlDatabase::addDatabase("SQLITE");
+	QCoreApplication::addLibraryPath("./plugins");
+	m_pDB = &QSqlDatabase::addDatabase("QSQLITE");
 	m_pDB->setDatabaseName(m_strDBPath);
 	if (!m_pDB->open())
 	{
